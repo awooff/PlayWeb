@@ -9,6 +9,11 @@ export default defineNuxtConfig({
       pathPrefix: false,
     },
   ],
+  image: {
+    domains: [
+      'nataziel.nexus'
+    ],
+  },
 
   modules: [
     '@nuxt/content',

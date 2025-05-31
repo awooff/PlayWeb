@@ -92,7 +92,7 @@ const items = ref<DropdownMenuItem[][]>([
 </script>
 
 <template>
-  <header class="flex w-full space-evenly gap-4 py-8 border-b-white border-b-2">
+  <header class="flex min-w-container space-evenly gap-4 py-8 border-b-white border-b-2">
     <nav class="inline-flex gap-4 justify-center items-center m-0">
       <UDropdownMenu
         :items="items"
@@ -105,8 +105,8 @@ const items = ref<DropdownMenuItem[][]>([
       <NuxtLink to="/" class="text-xl uppercase">PlayWeb</NuxtLink>
     </nav>
     <nav class="inline-flex gap-4 justify-center items-center m-0">
+      <NuxtLink to="/app">APP</NuxtLink>
       <NuxtLink to="/about">ABOUT</NuxtLink>
-      <NuxtLink to="/store">STORE</NuxtLink>
       <NuxtLink to="/contact">CONTACT</NuxtLink>
       <NuxtLink to="/blog">BLOG</NuxtLink>
     </nav>
