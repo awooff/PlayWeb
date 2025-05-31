@@ -41,7 +41,7 @@
 		/>
 
 		<section>
-			<ContentRenderer :if="articles" :value="articles"/>
+			<ContentRenderer v-if="articles" :value="articles || {}"/>
 		</section>
 	</article>
 </template>

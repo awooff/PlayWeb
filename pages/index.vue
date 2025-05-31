@@ -1,7 +1,7 @@
 <script setup lang="ts">
-  async function navButton(){
-    await navigateTo({path: 'app'})
-  }
+const navButton = async () => {
+  await navigateTo({ path: 'app' });
+};
 </script>
 <template>
   <h1 class="text-8xl uppercase">An MMO web experience for the 2020s.</h1>
@@ -9,6 +9,9 @@
   <hr/>
   <UButton
     color="primary"
-    :onclick="navButton"
-    class="max-w-xs text-center inline-flex">stuff</UButton>
+    @click="navButton"
+    class="max-w-xs text-center inline-flex"
+    >
+    stuff
+    </UButton>
 </template>
