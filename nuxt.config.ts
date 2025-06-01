@@ -20,7 +20,6 @@ export default defineNuxtConfig({
     }
   },
   modules: [
-    '@prisma/nuxt',
     '@nuxt/content',
     '@nuxt/fonts',
     '@nuxt/icon',

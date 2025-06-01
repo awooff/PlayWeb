@@ -1,4 +1,8 @@
 import { lucia } from '~/server/utils/lucia'
+import { users } from '~/server/schema'
+import type { InferSelectModel } from 'drizzle-orm'
+
+type DbUser = InferSelectModel<typeof users>
 
 export default defineEventHandler(async (event) => {
   const sessionId = getCookie(event, lucia.sessionCookieName)
@@ -23,11 +27,10 @@ export default defineEventHandler(async (event) => {
   return {
     user: user ? {
       id: user.id,
-      username: user.username,
-      email: user.email,
-      displayName: user.displayName,
-      avatar: user.avatar,
-      role: user.role
+      username: (user as DbUser).username,
+      email: (user as DbUser).email,
+      avatar: (user as DbUser).avatar,
+      role: (user as DbUser).role,
     } : null,
     session: {
       id: session.id,

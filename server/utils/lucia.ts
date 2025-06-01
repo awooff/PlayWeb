@@ -1,16 +1,13 @@
 import { Lucia } from "lucia";
-import { PrismaAdapter } from "@lucia-auth/adapter-prisma";
-import { PrismaClient } from "@prisma/client";
+import { DrizzlePostgreSQLAdapter } from "@lucia-auth/adapter-drizzle";
+import { users, sessions } from "~/server/schema";
+import {db} from "./drizzle";
 
-const client = new PrismaClient();
-
-const adapter = new PrismaAdapter(client.session, client.user);
+const adapter = new DrizzlePostgreSQLAdapter(db, sessions, users);
 
 export const lucia = new Lucia(adapter, {
   sessionCookie: {
-    // IMPORTANT!
     attributes: {
-      // set to `true` when using HTTPS
       secure: !process.dev
     }
   }
