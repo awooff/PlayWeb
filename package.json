@@ -40,6 +40,7 @@
     "zod": "^3.25.45"
   },
   "devDependencies": {
+    "@biomejs/biome": "^1.9.4",
     "@iconify-json/lucide": "^1.2.45",
     "@pinia/nuxt": "^0.11.0",
     "@types/jsonwebtoken": "^9.0.9",
