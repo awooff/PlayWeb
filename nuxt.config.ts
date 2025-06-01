@@ -2,7 +2,7 @@
 export default defineNuxtConfig({
   compatibilityDate: '2025-05-15',
   devtools: { enabled: true },
-  css: ['~/assets/css/main.css'],
+  css: ['~/assets/css/main.css', '~/assets/css/colours.css'],
   components: [
     {
       path: '~/components',
@@ -14,7 +14,11 @@ export default defineNuxtConfig({
       'nataziel.nexus'
     ],
   },
-
+  nitro: {
+    experimental: {
+      wasm: true
+    }
+  },
   modules: [
     '@prisma/nuxt',
     '@nuxt/content',
@@ -23,7 +27,7 @@ export default defineNuxtConfig({
     '@nuxt/image',
     '@nuxt/scripts',
     '@nuxt/ui',
-    '@nuxt/eslint',
-    '@nuxt/test-utils'
+    '@nuxt/test-utils',
+    '@pinia/nuxt'
   ]
 })

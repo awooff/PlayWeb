@@ -1,3 +1,17 @@
 @import "tailwindcss";
+
 @import "@nuxt/ui";
 
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@source "./colours.css";
+
+@theme static {
+  --color-wiki-gray-light: #f8f8f8;
+  --color-wiki-gray: #cccccc;
+  --color-wiki-blue: #0000ee;
+  --color-wiki-purple: #551a8b;
+  --color-wiki-yellow: #ffffcc;
+}
