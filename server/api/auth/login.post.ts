@@ -1,5 +1,5 @@
 import { hash, verify } from '@node-rs/argon2'
-import prisma from '~/lib/prisma'
+import prisma from '~/server/utils/prisma'
 import jwt from 'jsonwebtoken'
 import {lucia} from '../../utils/lucia';
 

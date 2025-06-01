@@ -53,14 +53,12 @@
 </template>
 
 <script setup>
-const { data: user } = await useFetch('/api/auth/session', {
-  default: () => null,
-  server: false
-})
-
+const userCookie = useCookie('user', { default: () => null })
+const user = userCookie.value
+console.log(user)
 const mainNavLinks = [
   { to: '/games', label: 'Games' },
-  { to: '/create', label: 'Create' },
+  { to: '/blog', label: 'Blog' },
   { to: '/community', label: 'Community' },
   { to: '/about', label: 'About' }
 ]
@@ -94,7 +92,6 @@ const userMenuItems = [
     }
   ]
 ]
-
 </script>
 
 <style scoped>

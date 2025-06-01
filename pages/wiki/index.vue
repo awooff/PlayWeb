@@ -14,3 +14,7 @@ const { data: posts } = await useAsyncData('wiki', () => {
     </ul>
   </div>
 </template>
+
+definePageMeta({
+  layout: 'home'
+})

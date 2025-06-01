@@ -1,5 +1,5 @@
 import { lucia } from '../../utils/lucia'
-import prisma from '~/lib/prisma'
+import prisma from '~/server/utils/prisma'
 import { hash } from '@node-rs/argon2'
 
 export default defineEventHandler(async (event) => {

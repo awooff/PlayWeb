@@ -160,9 +160,17 @@ const handleLogin = async (event) => {
     })
 
     successMessage.value = 'Login successful! Redirecting...'
+
+    // Set the user cookie for navbar and session state
+    const userData = {
+      username: response.username,
+      email: response.email
+    }
+    const userCookie = useCookie('user', { sameSite: 'strict' })
+    userCookie.value = userData
     
-    // Refresh the user session data
-    await refreshCookie('auth-session')
+    // Refresh the user session data (if needed)
+    refreshCookie('auth-session')
     
     await navigateTo('/home', { replace: true })
 
@@ -183,6 +191,18 @@ const handleLogin = async (event) => {
     }
   } finally {
     loading.value = false
+  }
+}
+
+// Clear the user cookie on logout (for completeness)
+if (process.client) {
+  const clearUserCookie = () => {
+    const userCookie = useCookie('user')
+    userCookie.value = null
+  }
+  // Listen for logout navigation (optional, for SPA UX)
+  if (window) {
+    window.addEventListener('logout', clearUserCookie)
   }
 }
 </script>

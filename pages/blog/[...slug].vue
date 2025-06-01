@@ -11,9 +11,8 @@
   
   const { path } = useRoute()
 
-  const { data: articles, error } = 
-    await useAsyncData(path, () =>
-        queryCollection('blog').path(path).first())
+  const { data: articles, error } = useAsyncData(path, () =>
+      queryCollection('blog').path(path).first())
 
 
   const data = computed<BlogPost>(() => {
