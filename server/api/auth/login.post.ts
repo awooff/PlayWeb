@@ -1,5 +1,5 @@
 import { hash, verify } from '@node-rs/argon2'
-import {db} from '~/server/utils/drizzle'
+import {db} from '~/server/utils/db'
 import { lucia } from '../../utils/lucia'
 import { eq, or } from 'drizzle-orm'
 import { users } from '~/server/schema'

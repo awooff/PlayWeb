@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { h, resolveComponent } from 'vue'
 import { upperFirst } from 'scule'
 import type { TableColumn } from '@nuxt/ui'
 

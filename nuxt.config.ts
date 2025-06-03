@@ -1,5 +1,8 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
+import { defineNuxtConfig } from 'nuxt/config'
+
 export default defineNuxtConfig({
+  ssr: true,
   compatibilityDate: '2025-05-15',
   devtools: { enabled: true },
   css: ['~/assets/css/main.css', '~/assets/css/colours.css'],
@@ -16,8 +19,17 @@ export default defineNuxtConfig({
   },
   nitro: {
     experimental: {
-      wasm: true
+      wasm: true,
+      tasks: true,
     }
+  },
+  vite: {
+    optimizeDeps: {
+      include: ['pg', 'drizzle-orm']
+    }
+  },
+  build: {
+    transpile: ['drizzle-orm', 'drizzle-kit']
   },
   modules: [
     '@nuxt/content',

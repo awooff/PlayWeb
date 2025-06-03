@@ -1,6 +1,6 @@
 import { lucia } from '../../utils/lucia'
 import { eq, or } from 'drizzle-orm'
-import {db} from '~/server/utils/drizzle'
+import {db} from '~/server/utils/db'
 import { users } from '~/server/schema'
 import { hash } from '@node-rs/argon2'
 import type { InferSelectModel } from 'drizzle-orm'
