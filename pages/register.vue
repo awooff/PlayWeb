@@ -100,87 +100,93 @@
 </template>
 
 <script setup>
-import { z } from 'zod'
+import { z } from "zod";
 
 // Define page meta
 definePageMeta({
-  auth: false,
-  layout: 'auth'
-})
+	auth: false,
+	layout: "auth",
+});
 
-const schema = z.object({
-  username: z
-    .string()
-    .min(3, 'Username must be at least 3 characters')
-    .regex(/^[a-zA-Z0-9_]+$/, 'Username can only contain letters, numbers, and underscores'),
-  email: z
-    .string()
-    .email('Please enter a valid email address'),
-  password: z
-    .string()
-    .min(8, 'Password must be at least 8 characters')
-    .regex(/(?=.*[a-z])(?=.*[A-Z])(?=.*\d)/, 'Password must contain at least one uppercase letter, one lowercase letter, and one number'),
-  confirmPassword: z.string()
-}).refine((data) => data.password === data.confirmPassword, {
-  message: "Passwords do not match",
-  path: ["confirmPassword"],
-})
+const schema = z
+	.object({
+		username: z
+			.string()
+			.min(3, "Username must be at least 3 characters")
+			.regex(
+				/^[a-zA-Z0-9_]+$/,
+				"Username can only contain letters, numbers, and underscores",
+			),
+		email: z.string().email("Please enter a valid email address"),
+		password: z
+			.string()
+			.min(8, "Password must be at least 8 characters")
+			.regex(
+				/(?=.*[a-z])(?=.*[A-Z])(?=.*\d)/,
+				"Password must contain at least one uppercase letter, one lowercase letter, and one number",
+			),
+		confirmPassword: z.string(),
+	})
+	.refine((data) => data.password === data.confirmPassword, {
+		message: "Passwords do not match",
+		path: ["confirmPassword"],
+	});
 
 // Form state
 const state = reactive({
-  username: '',
-  email: '',
-  password: '',
-  confirmPassword: ''
-})
+	username: "",
+	email: "",
+	password: "",
+	confirmPassword: "",
+});
 
-const loading = ref(false)
-const successMessage = ref('')
-const errorMessage = ref('')
+const loading = ref(false);
+const successMessage = ref("");
+const errorMessage = ref("");
 
 // Handle form submission
 const handleRegister = async (event) => {
-  // Clear previous messages
-  successMessage.value = ''
-  errorMessage.value = ''
+	// Clear previous messages
+	successMessage.value = "";
+	errorMessage.value = "";
 
-  loading.value = true
+	loading.value = true;
 
-  try {
-    // The form data is already validated by Zod at this point
-    const validatedData = event.data
+	try {
+		// The form data is already validated by Zod at this point
+		const validatedData = event.data;
 
-    // Call your registration API endpoint
-    const { data } = await $fetch('/api/auth/register', {
-      method: 'POST',
-      body: {
-        username: validatedData.username,
-        email: validatedData.email,
-        password: validatedData.password
-      }
-    })
+		// Call your registration API endpoint
+		const { data } = await $fetch("/api/auth/register", {
+			method: "POST",
+			body: {
+				username: validatedData.username,
+				email: validatedData.email,
+				password: validatedData.password,
+			},
+		});
 
-    successMessage.value = 
-      'Account created successfully! Please check your email to verify your account.'
-    
-    setTimeout(() => {
-      navigateTo('/login')
-    }, 2000)
+		successMessage.value =
+			"Account created successfully! Please check your email to verify your account.";
 
-  } catch (error) {
-    console.error('Registration error:', error)
-    
-    if (error.data?.message) {
-      errorMessage.value = error.data.message
-    } else if (error.statusCode === 409) {
-      errorMessage.value = 'Username or email already exists'
-    } else {
-      errorMessage.value = 'An error occurred while creating your account. Please try again.'
-    }
-  } finally {
-    loading.value = false
-  }
-}
+		setTimeout(() => {
+			navigateTo("/login");
+		}, 2000);
+	} catch (error) {
+		console.error("Registration error:", error);
+
+		if (error.data?.message) {
+			errorMessage.value = error.data.message;
+		} else if (error.statusCode === 409) {
+			errorMessage.value = "Username or email already exists";
+		} else {
+			errorMessage.value =
+				"An error occurred while creating your account. Please try again.";
+		}
+	} finally {
+		loading.value = false;
+	}
+};
 </script>
 
 <style scoped>

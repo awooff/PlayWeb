@@ -17,7 +17,7 @@
 </template>
 
 <script>
-  definePageMeta({
-    auth: false
-  })
+definePageMeta({
+	auth: false,
+});
 </script>

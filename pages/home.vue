@@ -4,8 +4,8 @@
 </template>
 
 <script>
-  definePageMeta({
-    auth: false,
-    layout: 'home'
-  })
+definePageMeta({
+	auth: false,
+	layout: "home",
+});
 </script>

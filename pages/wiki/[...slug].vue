@@ -1,32 +1,32 @@
 <script setup lang="ts">
-  type WikiPage = {
-    title     : string
-    date      : string
-    description : string
-    image     : string
-    alt       : string
-    tags      : string[]
-    published   : boolean
-  }
-  
-  const { path } = useRoute()
+type WikiPage = {
+	title: string;
+	date: string;
+	description: string;
+	image: string;
+	alt: string;
+	tags: string[];
+	published: boolean;
+};
 
-  const { data: articles, error } = useAsyncData(path, () =>
-      queryCollection('wiki').path(path).first())
+const { path } = useRoute();
 
+const { data: articles, error } = useAsyncData(path, () =>
+	queryCollection("wiki").path(path).first(),
+);
 
-  const data = computed<WikiPage>(() => {
-    const meta = articles?.value?.meta as unknown as WikiPage
-    return {
-      title: articles.value?.title || 'no-title available',
-      description: articles.value?.description || 'no-description available',
-      image: articles.value?.image || '/not-found.jpg',
-      alt: meta?.alt || 'no alter data available',
-      date: meta?.date || 'not-date-available',
-      tags: meta?.tags || [],
-      published: meta?.published || false,
-    }
-  })
+const data = computed<WikiPage>(() => {
+	const meta = articles?.value?.meta as unknown as WikiPage;
+	return {
+		title: articles.value?.title || "no-title available",
+		description: articles.value?.description || "no-description available",
+		image: articles.value?.image || "/not-found.jpg",
+		alt: meta?.alt || "no alter data available",
+		date: meta?.date || "not-date-available",
+		tags: meta?.tags || [],
+		published: meta?.published || false,
+	};
+});
 </script>
 
 <template>

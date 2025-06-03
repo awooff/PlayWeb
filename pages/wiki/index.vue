@@ -1,7 +1,7 @@
 <script setup lang="ts">
-const { data: posts } = await useAsyncData('wiki', () => {
-  return queryCollection('wiki').all()
-})
+const { data: posts } = await useAsyncData("wiki", () => {
+	return queryCollection("wiki").all();
+});
 </script>
 
 <template>

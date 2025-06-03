@@ -90,119 +90,121 @@
 </template>
 
 <script setup>
-import { z } from 'zod'
+import { z } from "zod";
 
 // Define page meta
 definePageMeta({
-  auth: false, // Allow unauthenticated users
-  layout: 'auth' // Use auth layout if you have one
-})
+	auth: false, // Allow unauthenticated users
+	layout: "auth", // Use auth layout if you have one
+});
 
 // Form reference
-const formRef = ref()
+const formRef = ref();
 
 // Form state using reactive (required by NuxtUI)
 const state = reactive({
-  identifier: '',
-  password: '',
-  rememberMe: false
-})
+	identifier: "",
+	password: "",
+	rememberMe: false,
+});
 
 // Form validation state
-const loading = ref(false)
-const successMessage = ref('')
-const errorMessage = ref('')
+const loading = ref(false);
+const successMessage = ref("");
+const errorMessage = ref("");
 
 // Validation schema using Zod (NuxtUI's preferred validation)
 const schema = z.object({
-  identifier: z.string()
-    .min(1, 'Username or email is required')
-    .min(3, 'Please enter a valid username or email'),
-  password: z.string()
-    .min(1, 'Password is required')
-})
+	identifier: z
+		.string()
+		.min(1, "Username or email is required")
+		.min(3, "Please enter a valid username or email"),
+	password: z.string().min(1, "Password is required"),
+});
 
 const validate = (state) => {
-  try {
-    schema.parse(state)
-    return []
-  } catch (error) {
-    return error.errors?.map(err => ({
-      path: err.path.join('.'),
-      message: err.message
-    })) || []
-  }
-}
+	try {
+		schema.parse(state);
+		return [];
+	} catch (error) {
+		return (
+			error.errors?.map((err) => ({
+				path: err.path.join("."),
+				message: err.message,
+			})) || []
+		);
+	}
+};
 
 // Handle form submission
 const handleLogin = async (event) => {
-  // Clear previous messages
-  successMessage.value = ''
-  errorMessage.value = ''
+	// Clear previous messages
+	successMessage.value = "";
+	errorMessage.value = "";
 
-  // Get validated form data from event
-  const formData = event.data
+	// Get validated form data from event
+	const formData = event.data;
 
-  loading.value = true
+	loading.value = true;
 
-  try {
-    // Call your login API endpoint - this should handle Lucia session creation
-    const response = await $fetch('/api/auth/login', {
-      method: 'POST',
-      body: {
-        identifier: formData.identifier,
-        password: formData.password,
-        rememberMe: formData.rememberMe
-      },
-      // Ensure cookies are included in the request/response
-      credentials: 'include'
-    })
+	try {
+		// Call your login API endpoint - this should handle Lucia session creation
+		const response = await $fetch("/api/auth/login", {
+			method: "POST",
+			body: {
+				identifier: formData.identifier,
+				password: formData.password,
+				rememberMe: formData.rememberMe,
+			},
+			// Ensure cookies are included in the request/response
+			credentials: "include",
+		});
 
-    successMessage.value = 'Login successful! Redirecting...'
+		successMessage.value = "Login successful! Redirecting...";
 
-    // Set the user cookie for navbar and session state
-    const userData = {
-      username: response.username,
-      email: response.email
-    }
-    const userCookie = useCookie('user', { sameSite: 'strict' })
-    userCookie.value = userData
-    
-    // Refresh the user session data (if needed)
-    refreshCookie('auth-session')
-    
-    await navigateTo('/home', { replace: true })
+		// Set the user cookie for navbar and session state
+		const userData = {
+			username: response.username,
+			email: response.email,
+		};
+		const userCookie = useCookie("user", { sameSite: "strict" });
+		userCookie.value = userData;
 
-  } catch (error) {
-    console.error('Login error:', error)
-    
-    // Handle different error scenarios
-    if (error.data?.message) {
-      errorMessage.value = error.data.message
-    } else if (error.statusCode === 401) {
-      errorMessage.value = 'Invalid username/email or password'
-    } else if (error.statusCode === 404) {
-      errorMessage.value = 'Account not found'
-    } else if (error.statusCode === 429) {
-      errorMessage.value = 'Too many login attempts. Please try again later.'
-    } else {
-      errorMessage.value = 'An error occurred while signing in. Please try again.'
-    }
-  } finally {
-    loading.value = false
-  }
-}
+		// Refresh the user session data (if needed)
+		refreshCookie("auth-session");
+
+		await navigateTo("/home", { replace: true });
+	} catch (error) {
+		console.error("Login error:", error);
+
+		// Handle different error scenarios
+		if (error.data?.message) {
+			errorMessage.value = error.data.message;
+		} else if (error.statusCode === 401) {
+			errorMessage.value = "Invalid username/email or password";
+		} else if (error.statusCode === 404) {
+			errorMessage.value = "Account not found";
+		} else if (error.statusCode === 429) {
+			errorMessage.value = "Too many login attempts. Please try again later.";
+		} else {
+			errorMessage.value =
+				"An error occurred while signing in. Please try again.";
+		}
+	} finally {
+		loading.value = false;
+	}
+};
 
 // Clear the user cookie on logout (for completeness)
 if (process.client) {
-  const clearUserCookie = () => {
-    const userCookie = useCookie('user')
-    userCookie.value = null
-  }
-  // Listen for logout navigation (optional, for SPA UX)
-  if (window) {
-    window.addEventListener('logout', clearUserCookie)
-  }
+	const clearUserCookie = () => {
+		const userCookie = useCookie("user");
+		userCookie.value = null;
+	};
+	// Listen for logout navigation (optional, for SPA UX)
+	if (window) {
+		window.addEventListener("logout", clearUserCookie);
+	}
 }
 </script>
 

@@ -44,32 +44,32 @@
 
 <script setup>
 const docLinks = [
-  { label: 'Getting Started', to: '/docs/getting-started' },
-  { label: 'API Reference', to: '/docs/api-reference' },
-  { label: 'Tutorials', to: '/docs/tutorials' },
-  { label: 'Code Examples', to: '/docs/examples' }
-]
+	{ label: "Getting Started", to: "/docs/getting-started" },
+	{ label: "API Reference", to: "/docs/api-reference" },
+	{ label: "Tutorials", to: "/docs/tutorials" },
+	{ label: "Code Examples", to: "/docs/examples" },
+];
 
 const quickLinks = [
-  { label: 'Installation Guide', to: '/docs/installation' },
-  { label: 'Component Library', to: '/docs/components' },
-  { label: 'Scripting Guide', to: '/docs/scripting' },
-  { label: 'Deployment', to: '/docs/deployment' }
-]
+	{ label: "Installation Guide", to: "/docs/installation" },
+	{ label: "Component Library", to: "/docs/components" },
+	{ label: "Scripting Guide", to: "/docs/scripting" },
+	{ label: "Deployment", to: "/docs/deployment" },
+];
 
 const communityLinks = [
-  { label: 'GitHub', to: 'https://github.com/playweb', target: '_blank' },
-  { label: 'Discord Server', to: '/discord' },
-  { label: 'Community Forum', to: '/forum' },
-  { label: 'User Showcase', to: '/showcase' }
-]
+	{ label: "GitHub", to: "https://github.com/playweb", target: "_blank" },
+	{ label: "Discord Server", to: "/discord" },
+	{ label: "Community Forum", to: "/forum" },
+	{ label: "User Showcase", to: "/showcase" },
+];
 
 const resourceLinks = [
-  { label: 'Sprite Editor', to: '/tools/sprite-editor' },
-  { label: 'Sound Library', to: '/tools/sound-library' },
-  { label: 'Asset Store', to: '/tools/asset-store' },
-  { label: 'Game Templates', to: '/templates' }
-]
+	{ label: "Sprite Editor", to: "/tools/sprite-editor" },
+	{ label: "Sound Library", to: "/tools/sound-library" },
+	{ label: "Asset Store", to: "/tools/asset-store" },
+	{ label: "Game Templates", to: "/templates" },
+];
 </script>
 
 <style scoped>

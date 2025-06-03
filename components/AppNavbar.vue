@@ -53,45 +53,45 @@
 </template>
 
 <script setup>
-const userCookie = useCookie('user', { default: () => null })
-const user = userCookie.value
-console.log(user)
+const userCookie = useCookie("user", { default: () => null });
+const user = userCookie.value;
+console.log(user);
 const mainNavLinks = [
-  { to: '/games', label: 'Games' },
-  { to: '/blog', label: 'Blog' },
-  { to: '/community', label: 'Community' },
-  { to: '/about', label: 'About' }
-]
+	{ to: "/games", label: "Games" },
+	{ to: "/blog", label: "Blog" },
+	{ to: "/community", label: "Community" },
+	{ to: "/about", label: "About" },
+];
 
 const userMenuItems = [
-  [
-    {
-      label: 'Profile',
-      icon: 'i-lucide-user',
-      click: () => navigateTo('/profile')
-    },
-    {
-      label: 'Dashboard',
-      icon: 'i-lucide-home',
-      click: () => navigateTo('/dashboard')
-    },
-    {
-      label: 'Settings',
-      icon: 'i-lucide-settings',
-      click: () => navigateTo('/settings')
-    }
-  ],
-  [
-    {
-      label: 'Sign Out',
-      icon: 'i-lucide-log-out',
-      click: async () => {
-        await $fetch('/api/auth/logout', { method: 'POST' })
-        await navigateTo('/login')
-      }
-    }
-  ]
-]
+	[
+		{
+			label: "Profile",
+			icon: "i-lucide-user",
+			click: () => navigateTo("/profile"),
+		},
+		{
+			label: "Dashboard",
+			icon: "i-lucide-home",
+			click: () => navigateTo("/dashboard"),
+		},
+		{
+			label: "Settings",
+			icon: "i-lucide-settings",
+			click: () => navigateTo("/settings"),
+		},
+	],
+	[
+		{
+			label: "Sign Out",
+			icon: "i-lucide-log-out",
+			click: async () => {
+				await $fetch("/api/auth/logout", { method: "POST" });
+				await navigateTo("/login");
+			},
+		},
+	],
+];
 </script>
 
 <style scoped>

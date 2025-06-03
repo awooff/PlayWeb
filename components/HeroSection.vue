@@ -2,5 +2,5 @@
 </template>
 
 <script setup lang="ts">
-defineEmits(['navigate']);
+defineEmits(["navigate"]);
 </script>
